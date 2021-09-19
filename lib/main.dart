@@ -1,80 +1,66 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-      home: SafeArea(
-          child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.pink,
-                title: const Text('Cua nang Flutter'),
-              ),
-              body: buildColumn()))));
-  // body: ColumnWidget()))));
+  runApp(MyApp());
 }
 
-// method
-Column buildColumn() {
-  return Column(
-    children: [
-      const Center(
-        child: Text('Hi Bạn, cho mình làm quen nhes'),
-      ),
-      Row(
-        children: [
-          TextButton(
-            onPressed: () {},
-            child: const Text('yellow'),
-            style: TextButton.styleFrom(backgroundColor: Colors.yellow),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('red'),
-            style: TextButton.styleFrom(backgroundColor: Colors.red),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('green'),
-            style: TextButton.styleFrom(backgroundColor: Colors.green),
-          )
-        ],
-      )
-    ],
-  );
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Đếm số',
+      home: MyHomePage(title: 'Đếm số'),
+    );
+  }
 }
 
-// class widget
-class ColumnWidget extends StatelessWidget {
-  const ColumnWidget({
-    Key key,
-  }) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Center(
-          child: Text('Hi Bạn, cho mình làm quen nhes'),
-        ),
-        Row(
-          children: [
-            TextButton(
-              onPressed: () {},
-              child: const Text('yellow'),
-              style: TextButton.styleFrom(backgroundColor: Colors.yellow),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('red'),
-              style: TextButton.styleFrom(backgroundColor: Colors.red),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('green'),
-              style: TextButton.styleFrom(backgroundColor: Colors.green),
-            )
-          ],
-        )
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: renderText(_counter),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
   }
+}
+
+class MyText extends StatelessWidget {
+  const MyText({this.counter});
+
+  final int counter;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('Số đếm hiện tại: $counter');
+  }
+}
+
+Text renderText(int counter) {
+  return Text('Số đếm hiện tại: $counter');
 }
