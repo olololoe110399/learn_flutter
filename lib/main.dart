@@ -10,6 +10,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Đếm số',
       home: MyHomePage(title: 'Đếm số'),
+      theme: ThemeData(
+          primaryColor: Colors.pink,
+          visualDensity: VisualDensity.adaptivePlatformDensity),
     );
   }
 }
@@ -28,6 +31,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
+      final snackbar =
+          SnackBar(content: Text('Số đêm trước khi increment: $_counter'));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
       _counter++;
     });
   }
@@ -37,11 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.black,
       ),
       body: Center(
         child: renderText(_counter),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
